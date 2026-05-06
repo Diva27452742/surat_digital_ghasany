@@ -1,0 +1,91 @@
+/* Paper / A4 Style */
+.paper {
+    background: white;
+    width: 210mm; /* A4 width */
+    min-height: 297mm; /* A4 height */
+    padding: 25mm 20mm;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+    border-radius: 4px;
+    transform: scale(0.9);
+    transform-origin: top center;
+    color: black;
+    line-height: 1.6;
+}
+
+/* Letter Content Styles (Real Paper feel) */
+#preview-content {
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    color: black;
+}
+
+.letter-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px double black; /* Classic official letter border */
+    padding-bottom: 15px;
+    position: relative;
+    min-height: 140px; /* Make space for larger logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-text {
+    flex: 1;
+    padding: 0 140px; /* Keep text centered even with logos */
+}
+
+.letter-header .logo-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 130px;
+    height: 130px;
+}
+
+.letter-header .logo-kiri {
+    left: 0;
+}
+
+.letter-header .logo-kanan {
+    right: 0;
+}
+
+.letter-header .logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.letter-header h2 {
+    font-size: 16pt;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.letter-date {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.letter-body {
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+.letter-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.signature {
+    width: 200px;
+    text-align: center;
+}
+
+.signature p {
+    margin-bottom: 60px;
+}

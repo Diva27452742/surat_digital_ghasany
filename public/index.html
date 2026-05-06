@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Surat Otomatis | Premium</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/paper.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="mail"></i>
+                <span>SuratDigital</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-template="izin">
+                    <i data-lucide="file-text"></i>
+                    <span>Surat Izin</span>
+                </button>
+                <button class="nav-item" data-template="lamaran">
+                    <i data-lucide="briefcase"></i>
+                    <span>Surat Lamaran</span>
+                </button>
+                <button class="nav-item" data-template="resmi">
+                    <i data-lucide="school"></i>
+                    <span>Surat Resmi</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2024 SuratDigital Pro</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Form Section -->
+            <section class="form-section">
+                <div class="header">
+                    <h1 id="template-title">Data Surat Izin</h1>
+                    <p>Lengkapi formulir di bawah ini untuk membuat surat.</p>
+                </div>
+                
+                <form id="letter-form" class="dynamic-form">
+                    <!-- Fields will be injected here by script.js -->
+                    <div id="form-fields"></div>
+                </form>
+
+                <div class="actions">
+                    <button type="button" id="download-pdf" class="btn btn-primary">
+                        <i data-lucide="download"></i>
+                        Download PDF
+                    </button>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <span>Preview Surat</span>
+                        <div class="preview-actions">
+                            <span class="badge">A4 Mode</span>
+                        </div>
+                    </div>
+                    <div class="paper" id="letter-preview">
+                        <!-- Preview content will be injected here -->
+                        <div id="preview-content"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
