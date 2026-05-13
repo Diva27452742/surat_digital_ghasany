@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Surat Otomatis | Premium</title>
+    <title>SuratDigital | Dashboard</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -11,9 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- html2pdf.js library -->
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -24,58 +25,165 @@
                 <span>SuratDigital</span>
             </div>
             <nav class="nav-menu">
-                <button class="nav-item active" data-template="izin">
+                <div class="nav-section-title">Main Menu</div>
+                <button class="nav-item active" data-view="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="riwayat">
+                    <i data-lucide="history"></i>
+                    <span>Riwayat Surat</span>
+                </button>
+
+                <div class="nav-section-title">Buat Surat</div>
+                <button class="nav-item" data-view="form" data-template="izin">
                     <i data-lucide="file-text"></i>
                     <span>Surat Izin</span>
                 </button>
-                <button class="nav-item" data-template="lamaran">
+                <button class="nav-item" data-view="form" data-template="lamaran">
                     <i data-lucide="briefcase"></i>
                     <span>Surat Lamaran</span>
                 </button>
-                <button class="nav-item" data-template="resmi">
+                <button class="nav-item" data-view="form" data-template="resmi">
                     <i data-lucide="school"></i>
                     <span>Surat Resmi</span>
                 </button>
             </nav>
             <div class="sidebar-footer">
-                <p>© 2024 SuratDigital Pro</p>
+                <div class="theme-toggle" id="theme-toggle">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="moon" id="theme-icon"></i>
+                        <span>Dark Mode</span>
+                    </div>
+                    <i data-lucide="toggle-left" id="theme-switch" style="color: var(--text-muted);"></i>
+                </div>
+                <p>© 2024 SuratDigital</p>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Form Section -->
-            <section class="form-section">
-                <div class="header">
-                    <h1 id="template-title">Data Surat Izin</h1>
-                    <p>Lengkapi formulir di bawah ini untuk membuat surat.</p>
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view-section active dashboard-view">
+                <div class="dashboard-header">
+                    <h1>Ringkasan Data</h1>
+                    <p>Statistik pembuatan surat otomatis Anda.</p>
                 </div>
                 
-                <form id="letter-form" class="dynamic-form">
-                    <!-- Fields will be injected here by script.js -->
-                    <div id="form-fields"></div>
-                </form>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i data-lucide="files"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Total Surat</p>
+                            <h3 id="stat-total">0</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i data-lucide="file-text"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Surat Izin</p>
+                            <h3 id="stat-izin">0</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Surat Lamaran</p>
+                            <h3 id="stat-lamaran">0</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i data-lucide="school"></i>
+                        </div>
+                        <div class="stat-info">
+                            <p>Surat Resmi</p>
+                            <h3 id="stat-resmi">0</h3>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="actions">
-                    <button type="button" id="download-pdf" class="btn btn-primary">
-                        <i data-lucide="download"></i>
-                        Download PDF
-                    </button>
+                <div class="chart-container">
+                    <canvas id="suratChart"></canvas>
                 </div>
             </section>
 
-            <!-- Preview Section -->
-            <section class="preview-section">
-                <div class="preview-container">
-                    <div class="preview-header">
-                        <span>Preview Surat</span>
-                        <div class="preview-actions">
-                            <span class="badge">A4 Mode</span>
-                        </div>
+            <!-- Riwayat View -->
+            <section id="view-riwayat" class="view-section riwayat-view">
+                <div class="dashboard-header">
+                    <h1>Riwayat Surat</h1>
+                    <p>Kelola dan cari surat yang telah dibuat.</p>
+                </div>
+                
+                <div class="riwayat-controls">
+                    <div class="search-box">
+                        <i data-lucide="search"></i>
+                        <input type="text" id="search-input" placeholder="Cari surat...">
                     </div>
-                    <div class="paper" id="letter-preview">
-                        <!-- Preview content will be injected here -->
-                        <div id="preview-content"></div>
+                    <select id="filter-select" class="filter-select">
+                        <option value="all">Semua Tipe</option>
+                        <option value="izin">Surat Izin</option>
+                        <option value="lamaran">Surat Lamaran</option>
+                        <option value="resmi">Surat Resmi</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Nama/Judul</th>
+                                <th>Tipe</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="riwayat-table-body">
+                            <!-- Data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Form View -->
+            <section id="view-form" class="view-section form-view">
+                <!-- Form Section -->
+                <div class="form-section">
+                    <div class="header">
+                        <h1 id="template-title">Data Surat Izin</h1>
+                        <p>Lengkapi formulir di bawah ini untuk membuat surat.</p>
+                    </div>
+                    
+                    <form id="letter-form" class="dynamic-form">
+                        <div id="form-fields"></div>
+                    </form>
+
+                    <div class="actions">
+                        <button type="button" id="save-download-pdf" class="btn btn-primary">
+                            <i data-lucide="download"></i>
+                            Simpan & Download PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-container">
+                        <div class="preview-header">
+                            <span>Preview Surat</span>
+                            <div class="preview-actions">
+                                <span class="badge">A4 Mode</span>
+                            </div>
+                        </div>
+                        <div class="paper" id="letter-preview">
+                            <div id="preview-content"></div>
+                        </div>
                     </div>
                 </div>
             </section>

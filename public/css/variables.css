@@ -1,12 +1,50 @@
 :root {
-    --primary: #1e293b;
-    --primary-hover: #0f172a;
-    --bg-app: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-    --bg-sidebar: rgba(255, 255, 255, 0.8);
+    /* Base Colors - Indigo/Purple Theme */
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #e0e7ff;
+    --secondary: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+
+    /* Light Theme (Default) */
+    --bg-app: #f8fafc;
+    --bg-sidebar: rgba(255, 255, 255, 0.95);
     --bg-card: #ffffff;
-    --text-main: #1e293b;
+    --bg-input: #f1f5f9;
+    --text-main: #0f172a;
     --text-muted: #64748b;
     --border: rgba(226, 232, 240, 0.8);
-    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
-    --glass: rgba(255, 255, 255, 0.9);
+    --border-input: #cbd5e1;
+    
+    /* Effects */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --glass: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease;
 }
+
+[data-theme="dark"] {
+    /* Dark Theme Override */
+    --bg-app: #0f172a;
+    --bg-sidebar: rgba(30, 41, 59, 0.95);
+    --bg-card: #1e293b;
+    --bg-input: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: rgba(51, 65, 85, 0.8);
+    --border-input: #334155;
+    
+    /* Effects Dark */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --glass: rgba(30, 41, 59, 0.85);
+    --glass-border: rgba(51, 65, 85, 0.5);
+}
+
